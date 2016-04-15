@@ -1,0 +1,9 @@
+<h2>{{title}}</h2>
+
+<ul>
+  {{#each webhooks as |webhook|}}
+      <li>{{webhook}}</li>
+  {{/each}}
+</ul>
+
+{{yield}}
