@@ -14,7 +14,11 @@ export default Ember.Component.extend({
         this.flashMessage('success', "You're now logged in!");
       }).catch((data) => {
         console.log(data);
-        this.flashMessage('error', "There was an error logging you in: " + data.errorDescription);
+        this.flashMessage({
+          content: "There was an error logging you in: " + data.errorDescription,
+          duration: 0, // Number in milliseconds, 0=infinity
+          type: 'error'
+        });
       });
     }
   }
