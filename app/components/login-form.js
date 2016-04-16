@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import particle from 'particle-api-js';
+import Particle from 'npm:particle-api-js';
+
+let particle = new Particle();
 
 export default Ember.Component.extend({
   actions: {
@@ -8,9 +10,11 @@ export default Ember.Component.extend({
       particle.login({
         username: this.element.querySelector('.username').value,
         password: this.element.querySelector('.password').value
-      }).then(function() {
-        console.log(arguments);
-        alert('logged in!');
+      }).then(() => {
+        this.flashMessage('success', "You're now logged in!");
+      }).catch((data) => {
+        console.log(data);
+        this.flashMessage('error', "There was an error logging you in: " + data.errorDescription);
       });
     }
   }
