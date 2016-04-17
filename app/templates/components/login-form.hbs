@@ -1,7 +1,11 @@
-<p>Username: <input type="text" class="username"></p>
+<form {{action "login" on="submit"}}>
 
-<p>Password: <input type="password" class="password"></p>
+    <p>Username: {{input type="text" value=username}}</p>
 
-<p><button {{action "login"}}>Login</button></p>
+    <p>Password: {{input type="password" value=password}}</p>
+
+    <p><button type="submit">Login</button></p>
+</form>
+
 
 {{yield}}

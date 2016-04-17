@@ -1,8 +1,8 @@
 <h2>{{title}}</h2>
 
 <ul>
-  {{#each webhooks as |webhook|}}
-      <li>{{webhook}}</li>
+  {{#each model as |webhook|}}
+      <li>{{webhook.requestType}} {{webhook.url}} ({{webhook.id}})</li>
   {{/each}}
 </ul>
 

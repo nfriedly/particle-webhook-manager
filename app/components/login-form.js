@@ -1,14 +1,14 @@
 import Ember from 'ember';
-import particle from '../services/particle';
 
 export default Ember.Component.extend({
-  particle: particle, //Ember.inject.service(),
+  particle: Ember.inject.service(),
+  username: '',
+  password: '',
   actions: {
     login: function() {
-      // todo: figure out if there's a more appropriate way to grab the values
-      this.particle.login({
-        username: this.element.querySelector('.username').value,
-        password: this.element.querySelector('.password').value
+      this.get('particle').login({
+        username: this.get('username'),
+        password: this.get('password')
       }).then(() => {
         this.flashMessage('success', "You're now logged in!");
       }).catch((data) => {
