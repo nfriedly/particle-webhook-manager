@@ -8,10 +8,10 @@ export default Ember.Service.extend({
     var auth = this.get('auth');
     return auth && auth.access_token || '';
   }),
+  webhooks: [],
 
   init() {
     this.particle = new Particle();
-    this.webhooks = [];
   },
 
   login(data) {

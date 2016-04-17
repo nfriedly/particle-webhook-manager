@@ -9,8 +9,8 @@ export default Ember.Component.extend({
         console.log(stream);
       })
       .catch(function(e) {
-        console.error('Error getting event stream', e)
-      }); 
+        console.error('Error getting event stream', e);
+      });
   }
 
 });
