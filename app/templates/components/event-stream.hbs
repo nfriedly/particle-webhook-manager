@@ -1,1 +1,7 @@
-{{yield}}
+<h2>Event Stream</h2>
+
+<ul>
+  {{#each model as |event|}}
+      <li>{{event.name}}: {{event.data}} <time>{{event.published_at}}</time></li>
+  {{/each}}
+</ul>

@@ -9,6 +9,8 @@ export default Ember.Service.extend({
     return auth && auth.access_token || '';
   }),
   webhooks: [],
+  eventStream: null,
+  events: [],
 
   init() {
     this.particle = new Particle();
@@ -21,8 +23,70 @@ export default Ember.Service.extend({
 
   handleLogin(data) {
     this.set('auth', data.body);
+    return Ember.RSVP.all([
+      this.fetchWebhooks(),
+      this.initEventStream()
+    ]);
+  },
+
+  fetchWebhooks() {
     return this.particle.listWebhooks({
       auth: this.get('token')
-    }).then( (data) => this.set('webhooks', data.body));
+    }).then( (data) => {
+      this.set('webhooks', data.body);
+    });
+  },
+
+  initEventStream() {
+    /*
+     getEventStream
+
+     src/Particle.js:274-298
+
+     Get a stream of events
+
+     Parameters
+
+     $0 Object
+       $0.deviceId String= Device ID or Name, or mine to indicate only your devices.
+       $0.name String= Event Name
+       $0.org String= Organization Slug
+       $0.product String= Product Slug
+       $0.auth String Access Token
+
+     Returns Promise. If the promise resolves, the resolution value will be an EventStream object that will emit 'event' events, as well as the specific named event.
+     */
+    return this.particle.getEventStream({
+      auth: this.get('token'),
+      deviceId: 'mine' // special case for "all of my devices"
+    }).then( (stream) => {
+      stream.on('event', (event) => {
+        // todo: figure out the "ember way" of doing this
+        var events = this.get('events');
+        events.push(event);
+        this.set('events', events);
+        console.log(event);
+        this.notifyPropertyChange('events');
+      });
+    });
   }
+  /*
+   publishEvent
+
+   src/Particle.js:308-314
+
+   Publish a event to the Particle Cloud
+
+   Parameters
+
+   $0 Object
+     $0.name String Event name
+     $0.data String Event data
+     $0.isPrivate Boolean Should the event be publicly available?
+     $0.auth String Access Token
+
+   Returns Promise
+   */
+
+
 });
