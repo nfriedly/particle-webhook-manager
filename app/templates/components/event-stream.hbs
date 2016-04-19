@@ -2,6 +2,6 @@
 
 <ul>
   {{#each model as |event|}}
-      <li>{{event.name}}: {{event.data}} <time>{{event.published_at}}</time></li>
+      <li>{{ident-icon id=event.coreid}} {{event.name}}: {{event.data}} <time>{{event.published_at}}</time></li>
   {{/each}}
 </ul>

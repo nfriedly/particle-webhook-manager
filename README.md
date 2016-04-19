@@ -3,15 +3,17 @@
 Online tool to create, manage, and test particle [Webhooks]. Currently very early stage.
 
 Todo:
-* Webhook management: create/delete, "update" that does both
+
+* Webhook management: view/create/delete, "update" button that creates new and then deletes old
 * Event creator
 * Tests
 * CI & CD
-* Better layout & design
-* Better internal structure - consider using ember data
+* layout & design
+* Better internal structure - consider using ember data for webhooks and events
 * Gravitar for currently logged in user 
+* use gravitar instead of identicon for manual events
 * Remember user and offer a logout option
-* automatic "avitar" generation for coreid on events (look up wavatar and friends)
+* Perhaps show a stream of public events on homepage (because it can be shown before login).
 
 ## Prerequisites
 

@@ -22,6 +22,7 @@ export default Ember.Service.extend({
   },
 
   handleLogin(data) {
+    console.log('handlelogin');
     this.set('auth', data.body);
     return Ember.RSVP.all([
       this.fetchWebhooks(),
@@ -30,6 +31,7 @@ export default Ember.Service.extend({
   },
 
   fetchWebhooks() {
+    console.log('fetch webhooks')
     return this.particle.listWebhooks({
       auth: this.get('token')
     }).then( (data) => {
@@ -38,24 +40,7 @@ export default Ember.Service.extend({
   },
 
   initEventStream() {
-    /*
-     getEventStream
-
-     src/Particle.js:274-298
-
-     Get a stream of events
-
-     Parameters
-
-     $0 Object
-       $0.deviceId String= Device ID or Name, or mine to indicate only your devices.
-       $0.name String= Event Name
-       $0.org String= Organization Slug
-       $0.product String= Product Slug
-       $0.auth String Access Token
-
-     Returns Promise. If the promise resolves, the resolution value will be an EventStream object that will emit 'event' events, as well as the specific named event.
-     */
+    console.log('init event stream')
     return this.particle.getEventStream({
       auth: this.get('token'),
       deviceId: 'mine' // special case for "all of my devices"

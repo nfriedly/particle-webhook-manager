@@ -10,8 +10,10 @@ export default Ember.Component.extend({
         username: this.get('username'),
         password: this.get('password')
       }).then(() => {
+        console.log('c');
         this.flashMessage('success', "You're now logged in!");
       }).catch((data) => {
+        console.log('d');
         console.log(data);
         this.flashMessage({
           content: "There was an error logging you in: " + data.errorDescription,
