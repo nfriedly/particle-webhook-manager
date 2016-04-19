@@ -1,6 +1,17 @@
 # Particle-webhook-manager
 
-Online tool to create, manage, and test particle Webhooks
+Online tool to create, manage, and test particle [Webhooks]. Currently very early stage.
+
+Todo:
+* Webhook management: create/delete, "update" that does both
+* Event creator
+* Tests
+* CI & CD
+* Better layout & design
+* Better internal structure - consider using ember data
+* Gravitar for currently logged in user 
+* Remember user and offer a logout option
+* automatic "avitar" generation for coreid on events (look up wavatar and friends)
 
 ## Prerequisites
 
@@ -50,3 +61,5 @@ Specify what it takes to deploy your app.
   * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
   * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
 
+
+[Webhooks]: https://docs.particle.io/guide/tools-and-features/webhooks/
