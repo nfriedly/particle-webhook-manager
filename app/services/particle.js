@@ -31,7 +31,6 @@ export default Ember.Service.extend({
   },
 
   fetchWebhooks() {
-    console.log('fetch webhooks')
     return this.particle.listWebhooks({
       auth: this.get('token')
     }).then( (data) => {
@@ -40,18 +39,13 @@ export default Ember.Service.extend({
   },
 
   initEventStream() {
-    console.log('init event stream')
     return this.particle.getEventStream({
       auth: this.get('token'),
       deviceId: 'mine' // special case for "all of my devices"
     }).then( (stream) => {
       stream.on('event', (event) => {
-        // todo: figure out the "ember way" of doing this
         var events = this.get('events');
-        events.push(event);
-        this.set('events', events);
-        console.log(event);
-        this.notifyPropertyChange('events');
+        events.pushObject(event);
       });
     });
   }
