@@ -2,6 +2,10 @@
 
 <ul>
   {{#each model as |webhook|}}
-      <li>{{webhook.requestType}} {{webhook.url}} ({{webhook.id}})</li>
+      <li>
+        {{#link-to "webhook" webhook.id}}
+          {{webhook.event}} {{webhook.requestType}} {{webhook.url}}
+        {{/link-to}}
+      </li>
   {{/each}}
 </ul>

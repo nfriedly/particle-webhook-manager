@@ -8,6 +8,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('login');
   this.route('webhooks');
+  this.route('webhook', { path: '/webhook/:webhook_id' });
 });
 
 export default Router;

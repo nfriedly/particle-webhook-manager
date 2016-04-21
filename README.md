@@ -7,7 +7,7 @@ Todo:
 * Webhook management: view/create/delete, "update" button that creates new and then deletes old
 * Event creator
 * Tests
-* CI & CD
+* CI & CD - https://github.com/poetic/ember-cli-github-pages
 * layout & design
 * Better internal structure - consider using ember data for webhooks and events
 * Gravitar for currently logged in user 
