@@ -4,10 +4,7 @@ import Particle from 'npm:particle-api-js';
 export default Ember.Service.extend({
   username: null,
   auth: null,
-  token: Ember.computed('auth', function() {
-    var auth = this.get('auth');
-    return auth && auth.access_token || '';
-  }),
+  // todo: look at moving these to the store and creating proper models and adapters
   webhooks: [],
   eventStream: null,
   events: [],
@@ -22,6 +19,7 @@ export default Ember.Service.extend({
   },
 
   handleLogin(data) {
+    // todo: see if I need to start a run loop here and in my event handler - https://guides.emberjs.com/v2.5.0/applications/run-loop/#toc_how-do-i-tell-ember-to-start-a-run-loop
     console.log('handlelogin');
     this.set('auth', data.body);
     return Ember.RSVP.all([
@@ -32,7 +30,7 @@ export default Ember.Service.extend({
 
   fetchWebhooks() {
     return this.particle.listWebhooks({
-      auth: this.get('token')
+      auth: this.get('auth.access_token')
     }).then( (data) => {
       this.set('webhooks', data.body);
     });
@@ -40,7 +38,7 @@ export default Ember.Service.extend({
 
   initEventStream() {
     return this.particle.getEventStream({
-      auth: this.get('token'),
+      auth: this.get('auth.access_token'),
       deviceId: 'mine' // special case for "all of my devices"
     }).then( (stream) => {
       stream.on('event', (event) => {
