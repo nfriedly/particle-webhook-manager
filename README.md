@@ -9,7 +9,8 @@ Todo:
 * Tests
 * CI & CD - https://github.com/poetic/ember-cli-github-pages
 * layout & design
-* Better internal structure - consider using ember data for webhooks and events
+* Automatic redirect to login and back
+* Use serializer instead of tweaking in adapter
 * Gravitar for currently logged in user 
 * use gravitar instead of identicon for manual events
 * Remember user and offer a logout option

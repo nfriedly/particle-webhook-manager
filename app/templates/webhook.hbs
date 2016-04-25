@@ -1,0 +1,17 @@
+<h2>{{parsed.event}} {{parsed.requestType}} {{parsed.url}}</h2>
+
+
+<pre>{{model}}</pre>
+
+
+<h3>Create a new Webhook from this:</h3>
+
+<form>
+    {{textarea value=model}}
+    <p class="error">{{#if isValid}}&nbsp;{{else}}{{error}}{{/if}}</p>
+    <p>Todo: bind textarea, add buttons for create, create and delete original</p>
+</form>
+
+{{event-stream}}
+
+<p>Todo: add form to create events, pre-populate it with details for this webhook</p>

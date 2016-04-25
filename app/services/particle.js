@@ -2,6 +2,8 @@ import Ember from 'ember';
 import Particle from 'npm:particle-api-js';
 
 export default Ember.Service.extend({
+  store: Ember.inject.service('store'),
+
   username: null,
   auth: null,
   // todo: look at moving these to the store and creating proper models and adapters
@@ -20,19 +22,13 @@ export default Ember.Service.extend({
 
   handleLogin(data) {
     // todo: see if I need to start a run loop here and in my event handler - https://guides.emberjs.com/v2.5.0/applications/run-loop/#toc_how-do-i-tell-ember-to-start-a-run-loop
-    console.log('handlelogin');
     this.set('auth', data.body);
-    return Ember.RSVP.all([
-      this.fetchWebhooks(),
-      this.initEventStream()
-    ]);
+    return this.initEventStream();
   },
 
   fetchWebhooks() {
     return this.particle.listWebhooks({
       auth: this.get('auth.access_token')
-    }).then( (data) => {
-      this.set('webhooks', data.body);
     });
   },
 
@@ -48,7 +44,7 @@ export default Ember.Service.extend({
     });
   }
   /*
-   publishEvent
+   todo: publishEvent
 
    src/Particle.js:308-314
 
